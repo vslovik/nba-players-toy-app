@@ -33,9 +33,15 @@ interface AllPlayerData {
 interface PlayerDataBlockProps {
     data: PlayerData;
     onClick: () => void;
+    highlight: string;
 
 }
 
 interface PlayerDataModalProps {
     data: PlayerData;
+}
+
+interface HighlightProps {
+    children:string;
+    highlight: string;
 }

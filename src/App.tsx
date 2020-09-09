@@ -2,28 +2,27 @@ import React, {useState} from 'react'
 import {useEffect} from 'react'
 import PlayerDataBlock from './components/PlayerDataBlock'
 import SearchPlayer from './components/SearchPlayer'
-import { Modal } from './components/Modal';
-import { PlayerDataModal } from './components/PlayerDataModal';
-
+import {Modal} from './components/Modal';
+import {PlayerDataModal} from './components/PlayerDataModal';
 import {useModal} from './hooks/useModal'
-import { getPlayers } from './API'
+import {getPlayers} from './API'
 
 const App: React.FC = () => {
-    const { isShown, toggle } = useModal();
-    const [playerData, setData] = useState<PlayerData>({
-          id: '',
-          first_name: '',
-          last_name: '',
-          height_feet: '',
-          height_inches: '',
-          position: '',
-          team: {full_name: ''},
-          weight_pounds: ''
-    });
 
-    useEffect(() => {
-        getOptions()
-    }, []);
+    const PLAYERS_TO_SHOW = 10;
+
+    const [query, setQuery] = useState<string>('');
+    const {isShown, toggle} = useModal();
+    const [playerData, setData] = useState<PlayerData>({
+        id: '',
+        first_name: '',
+        last_name: '',
+        height_feet: '',
+        height_inches: '',
+        position: '',
+        team: {full_name: ''},
+        weight_pounds: ''
+    });
 
     const [playersData, setPlayersData] = useState<PlayerData[]>();
 
@@ -31,32 +30,60 @@ const App: React.FC = () => {
 
     const getOptions = (): void => {
         getPlayers()
-            .then(({ status, data }) => {
+            .then(({status, data}) => {
                 if (status !== 200) {
                     throw new Error('getPlayers error')
                 }
-                setPlayersData(data.data)
+                setPlayersData(data.data);
+                if (query.length === 0) {
+                    setFoundPlayersData(data.data)
+                }
             })
             .catch((err) => console.log(err))
     };
 
+    useEffect(() => {
+        getOptions()
+    }, []);
+
     const handleQuery = (e: React.FormEvent, formData: FormData): void => {
-      e.preventDefault();
-      setFoundPlayersData(playersData ? playersData.filter(function(player) {
-          return formData.name === player.first_name || formData.name === player.last_name;
-      }): []);
+
+        if (e.currentTarget.tagName === 'FORM') {
+            e.preventDefault();
+        }
+        const query: string = formData.name.toLowerCase();
+        let filtered: PlayerData[] = playersData ? playersData.filter(function (player) {
+            return player.first_name.toLowerCase().indexOf(query) !== -1
+                || player.last_name.toLowerCase().indexOf(query) !== -1;
+        }) : [];
+        filtered.length === 0 && playersData ? setFoundPlayersData(playersData) : setFoundPlayersData(filtered);
+        setQuery(query)
     };
+
+    let more = foundPlayersData.length > PLAYERS_TO_SHOW ? (
+        <div className='Card'>
+            <div className='Card--text'>
+                ...
+            </div>
+        </div>
+    ) : (<React.Fragment/>);
 
     return (
         <main className='App'>
-          <h1>My Favorite NBA Player</h1>
-            <SearchPlayer getPlayerResult={handleQuery} />
-            {foundPlayersData.map((player: PlayerData) => (
+            <h1>My Favorite NBA Player</h1>
+            <SearchPlayer getPlayerResult={handleQuery}/>
+            {foundPlayersData.slice(0, PLAYERS_TO_SHOW).map((player: PlayerData) => (
                 <PlayerDataBlock
+                    highlight={query}
+                    key={player.id}
                     data={player}
-                    onClick={() => {toggle(); setData(player)}}
+                    onClick={() => {
+                        toggle();
+                        setData(player)
+                    }}
                 />
             ))}
+            {more}
             <React.Fragment>
                 <Modal
                     isShown={isShown}
