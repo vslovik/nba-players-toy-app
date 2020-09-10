@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 export const Wrapper = styled.div`
   position: fixed;
   top: 50%;
@@ -8,6 +9,7 @@ export const Wrapper = styled.div`
   width: inherit;
   outline: 0;
 `;
+
 export const Backdrop = styled.div`
   position: fixed;
   width: 100%;
@@ -17,6 +19,7 @@ export const Backdrop = styled.div`
   background: rgba(0, 0, 0, 0.3);
   z-index: 500;
 `;
+
 export const StyledModal = styled.div`
   z-index: 100;
   background: white;
@@ -24,6 +27,7 @@ export const StyledModal = styled.div`
   margin: auto;
   border-radius: 8px;
 `;
+
 export const Header = styled.div`
   border-radius: 8px 8px 0 0;
   display: flex;
@@ -31,6 +35,7 @@ export const Header = styled.div`
   padding: 0.3rem;
   background-color: #ff9900;
 `;
+
 export const HeaderText = styled.div`
   color: #fff;
   align-self: center;
@@ -38,6 +43,7 @@ export const HeaderText = styled.div`
   padding: 2px 4px;
   font-size: 14pt;
 `;
+
 export const CloseButton = styled.button`
   font-weight: bold;
   border: none;

@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import {useEffect} from 'react'
+import React, { useState, useCallback,  useEffect} from 'react'
 import PlayerDataBlock from './components/PlayerListItem'
 import SearchForm from './components/SearchForm'
 import {Modal} from './components/Modal';
@@ -29,7 +28,7 @@ const App: React.FC = () => {
 
     const [foundPlayersData, setFoundPlayersData] = useState<PlayerData[]>([]);
 
-    const getOptions = (): void => {
+    const getOptions = useCallback((): void => {
         getPlayers()
             .then(({status, data}) => {
                 if (status !== 200) {
@@ -41,11 +40,11 @@ const App: React.FC = () => {
                 }
             })
             .catch((err) => console.log(err))
-    };
+    }, [query.length]);
 
     useEffect(() => {
         getOptions()
-    }, []);
+    }, [getOptions]);
 
     const handleQuery = (e: React.FormEvent, formData: FormData): void => {
 

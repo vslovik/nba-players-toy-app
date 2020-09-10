@@ -4,6 +4,7 @@ import Loader from './Loader'
 import axios from 'axios'
 
 export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) => {
+
     const placeholder = "noimage350x254.png";
     const src = "https://nba-players.herokuapp.com/players/" + props.data.last_name + "/" + props.data.first_name;
 
@@ -31,7 +32,7 @@ export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) 
                 cacheImages(s).then(() => setPlayerPhoto({src: s, loading: false}));
             });
 
-    }, []);
+    }, [src]);
 
     const imgBlock = playerPhoto.loading
         ? (<Loader/>)

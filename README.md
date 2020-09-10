@@ -1,5 +1,5 @@
 ![alt text](https://github.com/vslovik/nba-players-toy-app/blob/master/screen.png?raw=true)
-
+![alt text](https://github.com/vslovik/nba-players-toy-app/blob/master/screen_search.png?raw=true)
 ### Toy React - Redux - Typescript Application
 ### "My NBA Players"
 

@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const FormWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
 export const Form = styled.form`
     display: flex;
     justify-content: space-between;
@@ -25,14 +19,4 @@ export const Input = styled.input`
 `;
 
 export const Label = styled.label`
-`;
-
-export const Button = styled.button`
-    background: #ff9900;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    border: none;
-    margin-top: 4px;
 `;

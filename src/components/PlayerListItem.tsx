@@ -9,13 +9,10 @@ const Data: React.FC<Props> = ({data, onClick, highlight}) => {
       return (<div/>);
   return (
     <Card>
-      <CardText>
-          <a onClick={onClick}>
-              <Highlight highlight={highlight}>{data.first_name}</Highlight>&nbsp;
-              <Highlight highlight={highlight}>{data.last_name}</Highlight>
-          </a>&nbsp;
-          <a onClick={onClick}>(more...)</a>
-      </CardText>
+      <CardText onClick={onClick}>
+          <Highlight highlight={highlight}>{data.first_name}</Highlight>&nbsp;
+          <Highlight highlight={highlight}>{data.last_name}</Highlight>
+      </CardText>&nbsp;<CardText onClick={onClick}>(more...)</CardText>
     </Card>
   )
 };

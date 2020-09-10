@@ -9,6 +9,7 @@ export const Card = styled.div`
     border-bottom: 1px solid #333333;
 `;
 
-export const CardText = styled.div`
+export const CardText = styled.span`
     color: #ff9900;
+    cursor: pointer;
 `;

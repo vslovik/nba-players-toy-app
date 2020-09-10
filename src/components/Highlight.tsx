@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent} from 'react';
 
 type Props = {
     highlight: string
@@ -24,7 +24,7 @@ export const Highlight: FunctionComponent<Props> = ({children, highlight}) => {
 
     return (
         <React.Fragment>
-            { children }
+            {children}
         </React.Fragment>
     )
 };

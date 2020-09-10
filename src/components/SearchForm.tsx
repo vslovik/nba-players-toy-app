@@ -6,6 +6,7 @@ type Props = {
 }
 
 const SearchForm: React.FC<Props> = ({getPlayerResult}) => {
+
     const [formData, setFormData] = useState<PlayerData | {}>();
 
     const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -23,7 +24,6 @@ const SearchForm: React.FC<Props> = ({getPlayerResult}) => {
         <Form onSubmit={(e) => getPlayerResult(e, formData)}>
             <Label htmlFor='name'>Player Name:</Label>
             <Input onChange={handleForm} type='text' id='name' onKeyDown={handleForm}/>
-            {/*<Button disabled={formData === undefined}>Search</Button>*/}
         </Form>
     )
 };
