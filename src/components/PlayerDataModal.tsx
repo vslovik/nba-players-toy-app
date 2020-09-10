@@ -1,9 +1,7 @@
 import React, {FunctionComponent, useState, useEffect} from 'react';
-import { Message } from './PlayerDataModal.style';
+import {Message, ImgContainer} from './PlayerDataModal.style';
+import Loader from './Loader'
 import axios from 'axios'
-import {
-    ImgContainer
-} from './modal.style';
 
 export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) => {
     // const placeholder = "https://via.placeholder.com/350x254?text=Loading+Photo";
@@ -12,9 +10,9 @@ export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) 
 
     const [playerPhoto, setPlayerPhoto] = useState<PlayerPhoto>({src: '', loading: true});
 
-    const cacheImages = async (src: string): Promise<any>  => {
+    const cacheImages = async (src: string): Promise<any> => {
 
-        const  preloadImage = (src: string) => {
+        const preloadImage = (src: string) => {
             new Promise(r => {
                 const image = new Image();
                 image.onload = r;
@@ -27,7 +25,6 @@ export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) 
     };
 
     useEffect(() => {
-
         axios.get(src)
             .then((response) => {
                 console.log('HEADERS', response.headers['content-type'].split(";")[0] === 'text/html');
@@ -38,16 +35,16 @@ export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) 
     }, []);
 
     const imgBlock = playerPhoto.loading
-        ? (<div className="loading">Loading&#8230;</div>)
+        ? (<Loader/>)
         : (<img src={playerPhoto.src} alt={props.data.first_name}/>);
 
     return (
-            <React.Fragment>
-                <ImgContainer>{imgBlock}</ImgContainer>
-                {/*<Message>Height: {props.data.height_feet} feet ({props.data.height_inches} inches)</Message>*/}
-                {/*<Message>Weight: {props.data.weight_pounds} pounds</Message>*/}
-                <Message>Team: {props.data.team.full_name}</Message>
-                <Message>Position: {props.data.position}</Message>
-            </React.Fragment>
-        );
+        <React.Fragment>
+            <ImgContainer>{imgBlock}</ImgContainer>
+            {/*<Message>Height: {props.data.height_feet} feet ({props.data.height_inches} inches)</Message>*/}
+            {/*<Message>Weight: {props.data.weight_pounds} pounds</Message>*/}
+            <Message>Team: {props.data.team.full_name}</Message>
+            <Message>Position: {props.data.position}</Message>
+        </React.Fragment>
+    );
 };

@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
+import {Form, Input, Label} from './SearchForm.style';
 
 type Props = {
     getPlayerResult: (e: React.FormEvent, formData: PlayerData | any) => void
 }
 
-const SearchPlayer: React.FC<Props> = ({getPlayerResult}) => {
+const SearchForm: React.FC<Props> = ({getPlayerResult}) => {
     const [formData, setFormData] = useState<PlayerData | {}>();
 
     const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -19,12 +20,12 @@ const SearchPlayer: React.FC<Props> = ({getPlayerResult}) => {
     };
 
     return (
-        <form className='Form' onSubmit={(e) => getPlayerResult(e, formData)}>
-            <label htmlFor='name'>Player Name:</label>
-            <input onChange={handleForm} type='text' id='name' onKeyDown={handleForm}/>
-            {/*<button disabled={formData === undefined}>Search</button>*/}
-        </form>
+        <Form onSubmit={(e) => getPlayerResult(e, formData)}>
+            <Label htmlFor='name'>Player Name:</Label>
+            <Input onChange={handleForm} type='text' id='name' onKeyDown={handleForm}/>
+            {/*<Button disabled={formData === undefined}>Search</Button>*/}
+        </Form>
     )
 };
 
-export default SearchPlayer
+export default SearchForm

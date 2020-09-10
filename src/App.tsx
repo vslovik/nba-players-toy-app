@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import {useEffect} from 'react'
-import PlayerDataBlock from './components/PlayerDataBlock'
-import SearchPlayer from './components/SearchPlayer'
+import PlayerDataBlock from './components/PlayerListItem'
+import SearchForm from './components/SearchForm'
 import {Modal} from './components/Modal';
 import {PlayerDataModal} from './components/PlayerDataModal';
-import {useModal} from './hooks/useModal'
+import {useModal} from './hooks/UseModal'
 import {getPlayers} from './API'
+import {Card, CardText} from './components/PlayerListItem.style';
 
 const App: React.FC = () => {
 
@@ -61,17 +62,17 @@ const App: React.FC = () => {
     };
 
     let more = foundPlayersData.length > PLAYERS_TO_SHOW ? (
-        <div className='Card'>
-            <div className='Card--text'>
+        <Card>
+            <CardText>
                 ...
-            </div>
-        </div>
+            </CardText>
+        </Card>
     ) : (<React.Fragment/>);
 
     return (
         <main className='App'>
             <h1>My Favorite NBA Player</h1>
-            <SearchPlayer getPlayerResult={handleQuery}/>
+            <SearchForm getPlayerResult={handleQuery}/>
             {foundPlayersData.slice(0, PLAYERS_TO_SHOW).map((player: PlayerData) => (
                 <PlayerDataBlock
                     highlight={query}
