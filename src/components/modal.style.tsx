@@ -53,3 +53,8 @@ export const Content = styled.div`
   overflow-y: auto;
   background: #333;
 `;
+
+export const ImgContainer = styled.div`
+    width:350px;
+    height:254px;
+`;

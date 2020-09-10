@@ -1,14 +1,16 @@
 import React, {FunctionComponent, useState, useEffect} from 'react';
 import { Message } from './PlayerDataModal.style';
 import axios from 'axios'
+import {
+    ImgContainer
+} from './modal.style';
 
 export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) => {
     // const placeholder = "https://via.placeholder.com/350x254?text=Loading+Photo";
     const placeholder = "noimage350x254.png";
-    const loadingPlaceholder = "loading350x254.png";
     const src = "https://nba-players.herokuapp.com/players/" + props.data.last_name + "/" + props.data.first_name;
 
-    const [playerPhoto, setPlayerPhoto] = useState<PlayerPhoto>({src: loadingPlaceholder, loading: true});
+    const [playerPhoto, setPlayerPhoto] = useState<PlayerPhoto>({src: '', loading: true});
 
     const cacheImages = async (src: string): Promise<any>  => {
 
@@ -35,13 +37,17 @@ export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) 
 
     }, []);
 
-     return (
+    const imgBlock = playerPhoto.loading
+        ? (<div className="loading">Loading&#8230;</div>)
+        : (<img src={playerPhoto.src} alt={props.data.first_name}/>);
+
+    return (
             <React.Fragment>
-                <img src={playerPhoto.src} alt={props.data.first_name}/>
+                <ImgContainer>{imgBlock}</ImgContainer>
                 {/*<Message>Height: {props.data.height_feet} feet ({props.data.height_inches} inches)</Message>*/}
                 {/*<Message>Weight: {props.data.weight_pounds} pounds</Message>*/}
                 <Message>Team: {props.data.team.full_name}</Message>
                 <Message>Position: {props.data.position}</Message>
             </React.Fragment>
-     );
+        );
 };
