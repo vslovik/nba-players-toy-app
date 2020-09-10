@@ -35,17 +35,20 @@ export const HeaderText = styled.div`
   color: #fff;
   align-self: center;
   font-weight: bold;
+  padding: 2px 4px;
+  font-size: 14pt;
 `;
 export const CloseButton = styled.button`
-  font-size: 0.8rem;
+  font-weight: bold;
   border: none;
   color: #fff;
-  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   background: none;
   :hover {
     cursor: pointer;
   }
 `;
+
 export const Content = styled.div`
   padding: 10px;
   max-height: 30rem;

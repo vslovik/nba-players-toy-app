@@ -1,10 +1,9 @@
 import React, {FunctionComponent, useState, useEffect} from 'react';
-import {Message, ImgContainer} from './PlayerDataModal.style';
+import {Card, CardText, ImgContainer} from './PlayerDataModal.style';
 import Loader from './Loader'
 import axios from 'axios'
 
 export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) => {
-    // const placeholder = "https://via.placeholder.com/350x254?text=Loading+Photo";
     const placeholder = "noimage350x254.png";
     const src = "https://nba-players.herokuapp.com/players/" + props.data.last_name + "/" + props.data.first_name;
 
@@ -41,10 +40,8 @@ export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) 
     return (
         <React.Fragment>
             <ImgContainer>{imgBlock}</ImgContainer>
-            {/*<Message>Height: {props.data.height_feet} feet ({props.data.height_inches} inches)</Message>*/}
-            {/*<Message>Weight: {props.data.weight_pounds} pounds</Message>*/}
-            <Message>Team: {props.data.team.full_name}</Message>
-            <Message>Position: {props.data.position}</Message>
+            <Card>Team: <CardText>{props.data.team.full_name}</CardText></Card>
+            <Card>Position: <CardText>{props.data.position}</CardText></Card>
         </React.Fragment>
     );
 };

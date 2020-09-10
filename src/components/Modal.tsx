@@ -45,7 +45,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
                 <StyledModal>
                     <Header>
                         <HeaderText>{headerText}</HeaderText>
-                        <CloseButton onClick={hide}>X</CloseButton>
+                        <CloseButton onClick={hide}>x</CloseButton>
                     </Header>
                     <Content>{modalContent}</Content>
                 </StyledModal>
