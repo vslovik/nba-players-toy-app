@@ -45,3 +45,8 @@ interface HighlightProps {
     children:string;
     highlight: string;
 }
+
+interface PlayerPhoto {
+    src: imgSrc;
+    loading: boolean;
+}
