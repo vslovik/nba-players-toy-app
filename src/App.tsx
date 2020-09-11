@@ -1,5 +1,5 @@
 import React, { useState, useCallback,  useEffect} from 'react'
-import PlayerDataBlock from './components/PlayerListItem'
+import PlayerListItem from './components/PlayerListItem'
 import SearchForm from './components/SearchForm'
 import {Modal} from './components/Modal';
 import {PlayerDataModal} from './components/PlayerDataModal';
@@ -88,7 +88,7 @@ const App: React.FC = () => {
             <h1>My Favorite NBA Player</h1>
             <SearchForm getPlayerResult={handleQuery}/>
             {foundPlayersData.slice(0, PLAYERS_TO_SHOW).map((player: PlayerData) => (
-                <PlayerDataBlock
+                <PlayerListItem
                     highlight={query}
                     key={player.id}
                     data={player}
