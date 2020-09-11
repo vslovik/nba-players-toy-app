@@ -4,7 +4,7 @@ import {Card, CardText} from './PlayerListItem.style';
 
 type Props = PlayerDataBlockProps
 
-const Data: React.FC<Props> = ({data, onClick, highlight}) => {
+const PlayerListItem: React.FC<Props> = ({data, onClick, highlight}) => {
   if (data.first_name === '')
       return (<div/>);
   const name = data.first_name + ' ' + data.last_name;
@@ -17,4 +17,4 @@ const Data: React.FC<Props> = ({data, onClick, highlight}) => {
   )
 };
 
-export default Data
+export default PlayerListItem
