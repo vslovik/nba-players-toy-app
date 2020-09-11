@@ -38,9 +38,7 @@ const App: React.FC = () => {
             e.preventDefault();
         }
         const query: string = formData.name.toLowerCase();
-        console.log('SET QUERY', query);
         setQuery(query);
-        console.log('HANDLE QUERY', query);
         if (query.length === 0) {
             setFoundPlayersData([]);
             return;
@@ -50,7 +48,6 @@ const App: React.FC = () => {
                 if (status !== 200) {
                     throw new Error('getPlayers error')
                 }
-                console.log('SET FOUND', data.data[0]);
                 setFoundPlayersData(data.data);
             }).catch((err) => {
                 console.log(err);
