@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useState, useEffect} from 'react';
-import {Card, CardText, ImgContainer} from './PlayerDataModal.style';
+import {Card, TeamCard, CardText, ImgContainer} from './PlayerDataModal.style';
 import Loader from './Loader'
 import axios from 'axios'
 
@@ -40,7 +40,9 @@ export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) 
     return (
         <React.Fragment>
             <ImgContainer>{imgBlock}</ImgContainer>
-            <Card>Team: <CardText>{props.data.team.full_name}</CardText></Card>
+            <Card>Team: <CardText>{props.data.team.full_name} ({props.data.team.abbreviation}) - {props.data.team.city}</CardText></Card>
+            <TeamCard>Conference: <CardText>{props.data.team.conference}</CardText></TeamCard>
+            <TeamCard>Division: <CardText>{props.data.team.division}</CardText></TeamCard>
             <Card>Position: <CardText>{props.data.position}</CardText></Card>
         </React.Fragment>
     );

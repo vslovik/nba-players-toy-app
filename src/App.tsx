@@ -20,7 +20,13 @@ const App: React.FC = () => {
         height_feet: '',
         height_inches: '',
         position: '',
-        team: {full_name: ''},
+        team: {
+            full_name: '',
+            abbreviation: '',
+            city: '',
+            conference: '',
+            division: ''
+        },
         weight_pounds: ''
     });
 

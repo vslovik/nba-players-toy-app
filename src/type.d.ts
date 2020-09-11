@@ -4,6 +4,10 @@ interface FormData {
 
 interface Team {
     full_name: string
+    abbreviation: string
+    city: string
+    conference: string
+    division: string
 }
 
 interface PlayerData {
