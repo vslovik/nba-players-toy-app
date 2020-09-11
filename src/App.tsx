@@ -47,12 +47,12 @@ const App: React.FC = () => {
             })
             .catch((err) => {
                 console.log(err);
-                // fallback in case of too more requests
-                let filtered: PlayerData[] = playersData ? playersData.filter(function (player) {
-                    const name = player.first_name + ' ' + player.last_name;
-                    return name.toLowerCase().indexOf(query) !== -1;
-                }) : [];
-                setFoundPlayersData(filtered)
+                // // fallback in case of too more requests
+                // let filtered: PlayerData[] = playersData ? playersData.filter(function (player) {
+                //     const name = player.first_name + ' ' + player.last_name;
+                //     return name.toLowerCase().indexOf(query) !== -1;
+                // }) : [];
+                // setFoundPlayersData(filtered)
             })
     }, [playersData]);
 
