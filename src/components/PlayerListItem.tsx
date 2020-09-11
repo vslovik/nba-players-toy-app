@@ -11,7 +11,7 @@ const Data: React.FC<Props> = ({data, onClick, highlight}) => {
   return (
     <Card>
       <CardText onClick={onClick}>
-          <Highlight highlight={highlight}>{name}</Highlight>
+          <Highlight highlight={highlight.trim()}>{name}</Highlight>
       </CardText>&nbsp;<CardText onClick={onClick}>(more...)</CardText>
     </Card>
   )

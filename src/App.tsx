@@ -35,9 +35,9 @@ const App: React.FC = () => {
                     throw new Error('getPlayers error')
                 }
                 if (query.length === 0) {
-                    setFoundPlayersData(data.data);
                     setPlayersData(data.data);
                 }
+                setFoundPlayersData(data.data);
             })
             .catch((err) => {
                 console.log(err);
