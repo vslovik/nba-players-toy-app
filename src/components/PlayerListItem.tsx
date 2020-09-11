@@ -7,11 +7,11 @@ type Props = PlayerDataBlockProps
 const Data: React.FC<Props> = ({data, onClick, highlight}) => {
   if (data.first_name === '')
       return (<div/>);
+  const name = data.first_name + ' ' + data.last_name;
   return (
     <Card>
       <CardText onClick={onClick}>
-          <Highlight highlight={highlight}>{data.first_name}</Highlight>&nbsp;
-          <Highlight highlight={highlight}>{data.last_name}</Highlight>
+          <Highlight highlight={highlight}>{name}</Highlight>
       </CardText>&nbsp;<CardText onClick={onClick}>(more...)</CardText>
     </Card>
   )
