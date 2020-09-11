@@ -28,8 +28,8 @@ const App: React.FC = () => {
 
     const [foundPlayersData, setFoundPlayersData] = useState<PlayerData[]>([]);
 
-    const getOptions = useCallback((): void => {
-        getPlayers()
+    const getOptions = useCallback((query: string): void => {
+        getPlayers(query)
             .then(({status, data}) => {
                 if (status !== 200) {
                     throw new Error('getPlayers error')
@@ -40,11 +40,12 @@ const App: React.FC = () => {
                 }
             })
             .catch((err) => console.log(err))
-    }, [query.length]);
+    }, []);
 
     useEffect(() => {
-        getOptions()
-    }, [getOptions]);
+        getOptions(query)
+    }, [getOptions, query]);
+
 
     const handleQuery = (e: React.FormEvent, formData: FormData): void => {
 
@@ -52,12 +53,18 @@ const App: React.FC = () => {
             e.preventDefault();
         }
         const query: string = formData.name.toLowerCase();
-        let filtered: PlayerData[] = playersData ? playersData.filter(function (player) {
-            return player.first_name.toLowerCase().indexOf(query) !== -1
-                || player.last_name.toLowerCase().indexOf(query) !== -1;
-        }) : [];
-        filtered.length === 0 && playersData ? setFoundPlayersData(playersData) : setFoundPlayersData(filtered);
-        setQuery(query)
+        setQuery(query);
+
+        getPlayers(query)
+            .then(({status, data}) => {
+                if (status !== 200) {
+                    throw new Error('getPlayers error')
+                }
+                setFoundPlayersData(data.data);
+                if (query.length === 0) {
+                    data.data.length === 0 && playersData ? setFoundPlayersData(playersData) : setFoundPlayersData(data.data);
+                }
+        }).catch((err) => console.log(err))
     };
 
     let more = foundPlayersData.length > PLAYERS_TO_SHOW ? (
