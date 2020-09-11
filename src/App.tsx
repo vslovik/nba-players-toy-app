@@ -42,8 +42,10 @@ const App: React.FC = () => {
                 }
                 if (query.length === 0) {
                     setPlayersData(data.data);
+                    setFoundPlayersData([]);
+                } else {
+                    setFoundPlayersData(data.data);
                 }
-                setFoundPlayersData(data.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -57,7 +59,8 @@ const App: React.FC = () => {
     }, [playersData]);
 
     useEffect(() => {
-        getOptions(query)
+        if (query.length !== 0 )
+            getOptions(query)
     }, [getOptions, query]);
 
 
@@ -68,17 +71,17 @@ const App: React.FC = () => {
         }
         const query: string = formData.name.toLowerCase();
         setQuery(query);
-
-        getPlayers(query)
-            .then(({status, data}) => {
-                if (status !== 200) {
-                    throw new Error('getPlayers error')
-                }
-                setFoundPlayersData(data.data);
-                if (query.length === 0) {
-                    data.data.length === 0 && playersData ? setFoundPlayersData(playersData) : setFoundPlayersData(data.data);
-                }
-        }).catch((err) => console.log(err))
+        if (query.length !== 0 )
+            getPlayers(query)
+                .then(({status, data}) => {
+                    if (status !== 200) {
+                        throw new Error('getPlayers error')
+                    }
+                    setFoundPlayersData(data.data);
+                    if (query.length === 0) {
+                        data.data.length === 0 && playersData ? setFoundPlayersData(playersData) : setFoundPlayersData(data.data);
+                    }
+            }).catch((err) => console.log(err))
     };
 
     let more = foundPlayersData.length > PLAYERS_TO_SHOW ? (
