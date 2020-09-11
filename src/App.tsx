@@ -34,13 +34,21 @@ const App: React.FC = () => {
                 if (status !== 200) {
                     throw new Error('getPlayers error')
                 }
-                setPlayersData(data.data);
                 if (query.length === 0) {
-                    setFoundPlayersData(data.data)
+                    setFoundPlayersData(data.data);
+                    setPlayersData(data.data);
                 }
             })
-            .catch((err) => console.log(err))
-    }, []);
+            .catch((err) => {
+                console.log(err);
+                // fallback in case of too more requests
+                let filtered: PlayerData[] = playersData ? playersData.filter(function (player) {
+                    const name = player.first_name + ' ' + player.last_name;
+                    return name.toLowerCase().indexOf(query) !== -1;
+                }) : [];
+                setFoundPlayersData(filtered)
+            })
+    }, [playersData]);
 
     useEffect(() => {
         getOptions(query)
