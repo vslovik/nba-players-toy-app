@@ -27,7 +27,6 @@ export const PlayerDataModal: FunctionComponent<PlayerDataModalProps> = (props) 
     useEffect(() => {
         axios.get(src)
             .then((response) => {
-                console.log('HEADERS', response.headers['content-type'].split(";")[0] === 'text/html');
                 const s = response.headers['content-type'].split(";")[0] === 'text/html' ? placeholder : src;
                 cacheImages(s).then(() => setPlayerPhoto({src: s, loading: false}));
             });
